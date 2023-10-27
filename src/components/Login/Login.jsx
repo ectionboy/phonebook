@@ -34,8 +34,6 @@ const Login = () => {
 
   const formSubmit = e => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
     Log({ email, password });
 
     setPassword('');
@@ -52,15 +50,15 @@ const Login = () => {
   }, [isAuth, navigate]);
   return (
     <div>
-      Login
-      
+      <h2>Sign in</h2>
+      <p>You need to sign in first</p>
       <form  onSubmit={formSubmit}>
         <input type="email" id="email"  value={email} onChange={inputEmail}  required/>
         <input type="password" id="password" value={password} onChange={inputPassword}  required/>
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
       </form>
       <p></p>
-      <Link to="/register">Register</Link>
+      <Link to="/register">Create an account</Link>
       <p></p>
       {/* <Box
         component="form"

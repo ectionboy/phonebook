@@ -17,7 +17,6 @@ const Header = () => {
 
   return (
     <div>
-      Header
       <Link to="/">Home</Link>
       {isAuth && <Link to="/contacts">Contacts</Link>}
 

@@ -56,7 +56,8 @@ const Register = () => {
   }, [isAuth, navigate]);
   return (
     <div>
-      Register
+      <h2>Register</h2>
+      <p>You need to register or sign in first</p>
       <form onSubmit={formSubmit}>
         <input
           type="text"
@@ -81,9 +82,10 @@ const Register = () => {
         />
         <button type="submit">Register</button>
       </form>
-      <p></p>
-      <Link to="/login">Login</Link>
-      <p></p>
+<div>
+        <p>Already have an account?</p>
+        <Link to="/login">Sign in</Link>
+</div>
       {/* <FormControl
       onSubmit={formSubmit}
         component="form"
