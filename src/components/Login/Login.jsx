@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { loginThunk } from 'redux/auth/slice';
 import { authSelector } from 'redux/selectors';
 import Visibility from '@mui/icons-material/Visibility';
