@@ -91,7 +91,6 @@ const Login = () => {
           flexDirection: 'column',
           gap: '14px',
         }}
-        noValidate
       >
         <TextField
           value={email}
@@ -100,6 +99,7 @@ const Login = () => {
           label="Email"
           variant="standard"
           type="email"
+          required
         />
         <FormControl variant="standard">
           <InputLabel htmlFor="password">Password</InputLabel>
@@ -108,6 +108,7 @@ const Login = () => {
             onChange={inputPassword}
             id="password"
             type={showPassword ? 'text' : 'password'}
+            required
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
