@@ -1,17 +1,21 @@
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+// import {
+//   Divider,
+//   List,
+//   ListItem,
+//   ListItemText,
+//   Typography,
+// } from '@mui/material';
+import ContactsList from 'components/ContactsList/ContactsList';
+import Form from 'components/Form/Form';
 import React from 'react';
-
+ 
 const Contacts = () => {
   return (
     <div>
-      Contacts
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <h1>Contacts</h1>
+      <Form />
+      <ContactsList />
+      {/* <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         <ListItem alignItems="flex-start">
           <ListItemText
             primary="...Name..."
@@ -30,7 +34,7 @@ const Contacts = () => {
           />
         </ListItem>
         <Divider variant="inset" component="li" />
-      </List>
+      </List> */}
     </div>
   );
 };

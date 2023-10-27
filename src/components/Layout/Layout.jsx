@@ -5,16 +5,17 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { authSelector } from 'redux/selectors';
 
 const Layout = () => {
+
+
+
+
   const isAuth = useSelector(authSelector);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuth) {
       navigate('/login', { replace: true });
-    }else {
-      navigate('/contacts', { replace: true });
-
-    }
+    } 
   }, [isAuth, navigate]);
   return (
     <div>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { login } from 'redux/auth/slice';
+import { loginThunk } from 'redux/auth/slice';
 import { authSelector } from 'redux/selectors';
 // import Visibility from '@mui/icons-material/Visibility';
 // import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -29,7 +29,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const Log = data => {
-    dispatch(login(data));
+    dispatch(loginThunk(data));
   };
 
   const formSubmit = e => {

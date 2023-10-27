@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from 'redux/auth/slice';
+import { Link } from 'react-router-dom';
+import { logOutThunk } from 'redux/auth/slice';
 import { authSelector } from 'redux/selectors';
 
 const Header = () => {
@@ -8,7 +9,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const exit = () => {
-    dispatch(logOut());
+    dispatch(logOutThunk());
   };
   const handleButton = () => {
   exit()
@@ -17,6 +18,9 @@ const Header = () => {
   return (
     <div>
       Header
+      <Link to="/">Home</Link>
+      {isAuth && <Link to="/contacts">Contacts</Link>}
+
       {isAuth && <button onClick={handleButton}>Logout</button>}
     </div>
   );

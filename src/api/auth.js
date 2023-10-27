@@ -8,7 +8,10 @@ export const setToken = token => {
 export const deleteToken = () => {
   axios.defaults.headers.common.Authorization = '';
 };
-
+export const refreshAuth = () => {
+	const token = JSON.parse(localStorage?.getItem('persist:auth'))
+	setToken(JSON.parse(token?.token))
+}
 export const signup = async body => {
   const { data } = await axios.post('users/signup', body);
   setToken(data.token);

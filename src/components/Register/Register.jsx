@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from 'redux/auth/slice';
+import { signUpThunk } from 'redux/auth/slice';
 import { authSelector } from 'redux/selectors';
 
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const Reg = data => {
-    dispatch(signUp(data));
+    dispatch(signUpThunk(data));
   };
 
   const formSubmit = e => {

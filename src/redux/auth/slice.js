@@ -5,19 +5,19 @@ const { initialState } = require("./initialState");
 
 
 // operations
-export const signUp = createAsyncThunk(
+export const signUpThunk = createAsyncThunk(
     'profile/signup', async (data) => {
         console.log(data)
           return await signup(data)
       }
   );
-  export const login = createAsyncThunk(
+  export const loginThunk = createAsyncThunk(
     'profile/login', async (data) => {
         console.log(data)
           return await signin(data)
       }
   );
-  export const logOut = createAsyncThunk(
+  export const logOutThunk = createAsyncThunk(
     'profile/logOut', async () => {
           return await logout()
       }
@@ -33,7 +33,7 @@ export const signUp = createAsyncThunk(
     state.token = '';
   }
 
-  const arrThunk = [ signUp, login, logOut ];
+  const arrThunk = [ signUpThunk, loginThunk, logOutThunk ];
   const arrTypeThunk = type => arrThunk.map(el => el[type]);
 
   const handleRejected = (state, { error }) => {
@@ -46,9 +46,9 @@ const authSlice = createSlice({
     initialState: initialState,
     extraReducers: builder => {
       builder
-        .addCase(signUp.fulfilled, authProfile)
-        .addCase(login.fulfilled, authProfile)
-        .addCase(logOut.fulfilled, logOutProfile)
+        .addCase(signUpThunk.fulfilled, authProfile)
+        .addCase(loginThunk.fulfilled, authProfile)
+        .addCase(logOutThunk.fulfilled, logOutProfile)
 
         .addMatcher(isAnyOf(...arrTypeThunk('rejected')), handleRejected);    },
   });
