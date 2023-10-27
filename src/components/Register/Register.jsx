@@ -1,37 +1,106 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Box, Button, IconButton, Input, InputAdornment, TextField } from '@mui/material';
-import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Visibility, VisibilityOff } from '@mui/icons-material';
+// import { Box, Button, FormControl, IconButton, Input, InputAdornment, TextField } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from 'redux/auth/slice';
+import { authSelector } from 'redux/selectors';
 
 const Register = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  // const [showPassword, setShowPassword] = useState(false);
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+  // const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  // const handleMouseDownPassword = (event) => {
+  //   event.preventDefault();
+  // };
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+
+  const Reg = data => {
+    dispatch(signUp(data));
   };
+
+  const formSubmit = e => {
+    e.preventDefault();
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    Reg({ name, email, password });
+    setPassword('');
+
+  };
+  const inputName = ({ target: { value } }) => {
+    setName(value);
+  };
+  const inputEmail = ({ target: { value } }) => {
+    setEmail(value);
+  };
+  const inputPassword = ({ target: { value } }) => {
+    setPassword(value);
+  };
+  const navigate = useNavigate();
+
+  const isAuth = useSelector(authSelector);
+
+  useEffect(() => {
+    if (isAuth) {
+
+      navigate('/', { replace: true });
+
+    }
+  }, [isAuth, navigate]);
   return (
     <div>
       Register
+      <form onSubmit={formSubmit}>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={inputName}
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={inputEmail}
+          required
+        />
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={inputPassword}
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
       <p></p>
-      <Link to="/">Home</Link>
+      <Link to="/login">Login</Link>
       <p></p>
-      <Box
+      {/* <FormControl
+      onSubmit={formSubmit}
         component="form"
         sx={{
           '& > :not(style)': { m: 1, width: '25ch' },
           display: 'flex',
           flexDirection: 'column',
         }}
-        noValidate
-        autoComplete="off"
       >
-        <TextField required id="name" label="Name" variant="standard" type="text" />
-        <TextField required id="email" label="Email" variant="standard" type="email" />
+        <TextField required id="name" label="Name" variant="standard" type="text" value={name} onChange={inputName} />
+        <TextField required id="email" label="Email" variant="standard" type="email" value={email} onChange={inputEmail} />
         <Input
-            id="standard-adornment-password"
+        required
+            id="password"
             type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={inputPassword} 
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -47,7 +116,7 @@ const Register = () => {
         <Button type="submit" variant="contained">
           Login
         </Button>
-      </Box>
+      </FormControl> */}
     </div>
   );
 };

@@ -1,18 +1,27 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import Header from 'components/Header/Header';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { authSelector } from 'redux/selectors';
 
 const Layout = () => {
-  return (
-    <div>Layout
-        
-        <p></p>
-        <Link to="/contacts">contacts</Link>
-        <p></p>
-        <Link to="/register">register</Link>
-        <p></p>
-        <Link to="/login">login</Link>
-    </div>
-  )
-}
+  const isAuth = useSelector(authSelector);
+  const navigate = useNavigate();
 
-export default Layout
+  useEffect(() => {
+    if (!isAuth) {
+      navigate('/login', { replace: true });
+    }else {
+      navigate('/contacts', { replace: true });
+
+    }
+  }, [isAuth, navigate]);
+  return (
+    <div>
+      <Header />
+      <Outlet />
+    </div>
+  );
+};
+
+export default Layout;
