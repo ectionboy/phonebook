@@ -29,7 +29,7 @@ export const signUpThunk = createAsyncThunk(
     state.token = payload.token;
   }
   export const logOutProfile = (state) => {
-    state.profile = null;
+    state.profile =  { name: null, email: null };
     state.token = '';
   }
 

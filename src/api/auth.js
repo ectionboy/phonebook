@@ -9,8 +9,13 @@ export const deleteToken = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 export const refreshAuth = () => {
-	const token = JSON.parse(localStorage?.getItem('persist:auth'))
-	setToken(JSON.parse(token?.token))
+  if (localStorage.getItem('persist:auth') !== null) {
+    const token = JSON.parse(localStorage.getItem('persist:auth'))
+	  setToken(JSON.parse(token?.token))
+  } else {
+    setToken('')
+  }
+
 }
 export const signup = async body => {
   const { data } = await axios.post('users/signup', body);

@@ -4,10 +4,14 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 export const setToken = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
+
 export const refreshContacts = () => {
-  const token = JSON.parse(localStorage?.getItem('persist:auth'));
-  setToken(JSON.parse(token?.token));
-};
+  if (localStorage.getItem('persist:auth') !== null) {
+    const token = JSON.parse(localStorage.getItem('persist:auth'))
+	  setToken(JSON.parse(token?.token))
+  } else {
+    setToken('')
+  }}
 export const getContacts = async () => {
   refreshContacts();
   const { data } = await axios('/contacts');
