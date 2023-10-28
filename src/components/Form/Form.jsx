@@ -73,20 +73,12 @@ const Form = () => {
     //   </FormElement>
     // </div>
 
-<Container
-sx={{
-  width: '300px',
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '24px 0',
-  margin: '0'
-}}
->
+
 <Box
   onSubmit={formSubmit}
   component="form"
   sx={{
-    width: '100%',
+    width: '220px',
     display: 'flex',
     flexDirection: 'column',
     gap: '14px',
@@ -115,7 +107,6 @@ sx={{
   Add contact
   </Button>
 </Box>
-</Container>
   );
 };
 
