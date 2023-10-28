@@ -1,12 +1,14 @@
 import { Box, Button, Container, Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { logOutThunk } from 'redux/auth/slice';
-import { authSelector, nameSelector } from 'redux/selectors';
+import { 
+  // authSelector,
+   nameSelector } from 'redux/selectors';
 
 const Header = () => {
-  const isAuth = useSelector(authSelector);
+  // const isAuth = useSelector(authSelector);
   const name = useSelector(nameSelector);
 
   const navigate = useNavigate();
