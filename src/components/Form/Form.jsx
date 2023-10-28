@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { FormElement, Title, FormInput, FormButton } from './Form.styled';
 import { addContact } from 'redux/contacts/operations';
 import { getContacts } from 'redux/selectors';
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 
 const Form = () => {
   const [name, setName] = useState('');
