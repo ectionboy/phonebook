@@ -1,5 +1,6 @@
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import ContactsList from 'components/ContactsList/ContactsList';
+import Filter from 'components/Filter/Filter';
 import Form from 'components/Form/Form';
 import React from 'react';
 
@@ -20,7 +21,10 @@ const Contacts = () => {
         Contacts
       </Typography>
       <Form />
-      <ContactsList />
+      <Box>
+        <Filter />
+        <ContactsList />
+      </Box>
     </Container>
   );
 };
