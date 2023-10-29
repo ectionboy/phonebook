@@ -1,26 +1,16 @@
-import { Box, Button, Container, Divider, Typography } from '@mui/material';
+import { Box, Button, Container, Divider } from '@mui/material';
+import AuthMenu from 'components/AuthMenu/AuthMenu';
+import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logOutThunk } from 'redux/auth/slice';
-import { 
-  // authSelector,
-   nameSelector } from 'redux/selectors';
+import { authSelector } from 'redux/selectors';
 
 const Header = () => {
-  // const isAuth = useSelector(authSelector);
-  const name = useSelector(nameSelector);
+  const isAuth = useSelector(authSelector);
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const exit = () => {
-    dispatch(logOutThunk());
-  };
-  const handleButton = () => {
-    exit();
-  };
   const navToHomePage = () => {
     navigate('/');
   };
@@ -59,21 +49,7 @@ const Header = () => {
             Contacts
           </Button>
         </Box>
-        <Box
-          component="div"
-          sx={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}
-        >
-          <Typography variant="body2">Hi, {name ?? ''}</Typography>
-          <Button
-            sx={{ padding: '0px', textTransform: 'none' }}
-            variant="outlined"
-            onClick={handleButton}
-            type="button"
-            size="small"
-          >
-            Logout
-          </Button>
-        </Box>
+        {isAuth ? <UserMenu /> : <AuthMenu />}
       </Container>
       <Divider />
     </>
