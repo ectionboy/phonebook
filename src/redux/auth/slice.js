@@ -6,20 +6,38 @@ const { initialState } = require("./initialState");
 
 // operations
 export const signUpThunk = createAsyncThunk(
-    'profile/signup', async (data) => {
-        console.log(data)
-          return await signup(data)
+    'profile/signup', async (body, { rejectWithValue }) => {
+        // console.log(data)
+        //   return await signup(data)
+        try {
+          const data = await signup(body)
+          return data
+        } catch (error) {
+          return rejectWithValue(error.response.data)
+        }
       }
   );
   export const loginThunk = createAsyncThunk(
-    'profile/login', async (data) => {
-        console.log(data)
-          return await signin(data)
+    'profile/login', async (body, { rejectWithValue }) => {
+        // console.log(data)
+        //   return await signin(data)
+        try {
+          const data = await signin(body)
+          return data
+        } catch (error) {
+          return rejectWithValue(error.message)
+        }
       }
   );
   export const logOutThunk = createAsyncThunk(
-    'profile/logOut', async () => {
-          return await logout()
+    'profile/logOut', async ({rejectWithValue}) => {
+          // return await logout()
+          try {
+            const data = await logout()
+            return data
+          } catch (error) {
+            return rejectWithValue(error.response.data)
+          }
       }
   );
 
@@ -28,25 +46,14 @@ export const signUpThunk = createAsyncThunk(
     state.profile = payload.user;
     state.token = payload.token;
   }
-  export const logOutProfile = (state) => {
-    // state.profile =  { name: null, email: null };
-    // state.token = '';
-    // console.log('===')
-    handleLogOut()
-  }
+  
 
   const arrThunk = [ signUpThunk, loginThunk, logOutThunk ];
   const arrTypeThunk = type => arrThunk.map(el => el[type]);
 
   const handleRejected = (state, { error }) => {
-    console.log(error.message)
   };
-  export const handleLogOut = (state) => {
-    console.log('---')
-    state.token = '';
-    state.profile =  { name: null, email: null };
 
-  };
 
 
 const authSlice = createSlice({
@@ -54,16 +61,15 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {
       logOut: (state) => {
-        state.profile = null
+        state.profile =  { name: null, email: null }
         state.token = ''
+        logOutThunk()
       },
     },
     extraReducers: builder => {
       builder
         .addCase(signUpThunk.fulfilled, authProfile)
         .addCase(loginThunk.fulfilled, authProfile)
-        .addCase(logOutThunk.fulfilled, logOutProfile)
-        .addCase(logOutThunk.rejected, logOutProfile)
 
         .addMatcher(isAnyOf(...arrTypeThunk('rejected')), handleRejected)
          },

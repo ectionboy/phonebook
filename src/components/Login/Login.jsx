@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -7,6 +8,7 @@ import {
   Input,
   InputAdornment,
   InputLabel,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
@@ -29,6 +31,7 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const inputEmail = ({ target: { value } }) => {
     setEmail(value);
@@ -39,8 +42,22 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const Log = data => {
-    dispatch(loginThunk(data));
+  // const Log = data => {
+  //   dispatch(loginThunk(data));
+  // };
+
+  const Log = async body => {
+    try {
+      await dispatch(loginThunk(body)).unwrap();
+    } catch (error) {
+      setError(true);
+    }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setError(false);
   };
 
   const formSubmit = e => {
@@ -48,7 +65,6 @@ const Login = () => {
     Log({ email, password });
 
     setPassword('');
-    
   };
 
   const navToRegPage = () => {
@@ -59,6 +75,15 @@ const Login = () => {
   };
   return (
     <Box>
+      <Snackbar
+        open={error}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={handleClose}
+      >
+        <Alert severity="warning">Incorrect login or password</Alert>
+      </Snackbar>
+
       <Button
         sx={{
           maxWidth: '180px',

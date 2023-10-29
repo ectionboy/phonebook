@@ -6,7 +6,6 @@ import NotFound from './NotFound/NotFound';
 // import Login from './Login/Login';
 import { Suspense, lazy, useEffect } from 'react';
 import { refreshAuth } from 'api/auth';
-import { refreshContacts } from 'api/contacts';
 import Home from './Home/Home';
 import PublicRoute from 'guards/PublicRoute/PublicRoute';
 import PrivateRoute from 'guards/PrivateRoute/PrivateRoute';
@@ -18,7 +17,6 @@ const Contacts = lazy(() => import('./Contacts/Contacts'));
 export const App = () => {
   useEffect(() => {
     refreshAuth();
-    refreshContacts();
   }, []);
   return (
     <Suspense fallback={'Loading.....'}>

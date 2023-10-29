@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   IconButton,
   List,
@@ -11,7 +12,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/contacts/operations';
 import { getContacts, getFilter } from 'redux/selectors';
-import { refreshContacts } from 'api/contacts';
 
 const ContactsList = () => {
   const [filtered, setFiltered] = useState([]);
@@ -20,7 +20,6 @@ const ContactsList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    refreshContacts();
     dispatch(fetchContacts());
   }, [dispatch]);
 
@@ -63,8 +62,8 @@ const ContactsList = () => {
           ))}
       </ContactsListUl> */}
             {isLoading && <Typography variant="overline" display="block"  gutterBottom>Loading contacts...</Typography>}
-      {error && <Typography variant="h6" display="block" color={'red'} gutterBottom>{error}
-      </Typography>}
+      {error &&  <Alert  sx={{marginTop: '8px'}} severity="warning">{error}</Alert>
+}
       <List sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
         {filtered &&
           filtered.map(contact => (

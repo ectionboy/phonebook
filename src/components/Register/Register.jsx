@@ -1,5 +1,6 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import {
+  Alert,
   Box,
   Button,
   Container,
@@ -8,6 +9,7 @@ import {
   Input,
   InputAdornment,
   InputLabel,
+  Snackbar,
   TextField,
   Typography,
 } from '@mui/material';
@@ -29,11 +31,26 @@ const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+
 
   const dispatch = useDispatch();
 
-  const Reg = data => {
-    dispatch(signUpThunk(data));
+  // const Reg = data => {
+  //   dispatch(signUpThunk(data));
+  // };
+  const Reg = async body => {
+    try {
+      await dispatch(signUpThunk(body)).unwrap();
+    } catch (error) {
+      setError(true);
+    }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setError(false);
   };
 
   const formSubmit = e => {
@@ -64,6 +81,14 @@ const Register = () => {
 
   return (
     <Box>
+            <Snackbar
+        open={error}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={handleClose}
+      >
+        <Alert severity="warning">Something is wrong</Alert>
+      </Snackbar>
       <Button
         sx={{
           maxWidth: '180px',
@@ -76,6 +101,7 @@ const Register = () => {
         <ArrowBackIosIcon />
         Go to main page
       </Button>
+      
       <Container
         sx={{
           width: '300px',

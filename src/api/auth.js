@@ -27,8 +27,7 @@ export const signin = async body => {
   setToken(data.token);
   return data;
 };
-export const logout = async () => {
-  deleteToken();
+export const logout = async () => {deleteToken();
   const { data } = await axios.post('users/logout');
   
   return data;
