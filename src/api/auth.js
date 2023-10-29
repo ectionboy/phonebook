@@ -28,8 +28,9 @@ export const signin = async body => {
   return data;
 };
 export const logout = async () => {
-  const { data } = await axios.post('users/logout');
   deleteToken();
+  const { data } = await axios.post('users/logout');
+  
   return data;
 };
 
