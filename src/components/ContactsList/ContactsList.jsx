@@ -12,7 +12,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/contacts/operations';
 import { getContacts, getFilter } from 'redux/selectors';
-
 const ContactsList = () => {
   const [filtered, setFiltered] = useState([]);
   const { items, isLoading, error } = useSelector(getContacts);
