@@ -8,20 +8,21 @@ export const setToken = token => {
 export const deleteToken = () => {
   axios.defaults.headers.common.Authorization = '';
 };
-export const refreshAuth = () => {
-  if (localStorage.getItem('persist:auth') !== null) {
-    const token = JSON.parse(localStorage.getItem('persist:auth'))
-	  setToken(JSON.parse(token?.token))
-  } else {
-    setToken('')
-  }
 
-}
 export const signup = async body => {
-  const { data } = await axios.post('users/signup', body);
-  setToken(data.token);
-  return data;
+  try {
+    const { data } = await axios.post('users/signup', body);
+        setToken(data.token);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
 };
+// export const signup = async body => {
+//   const { data } = await axios.post('users/signup', body);
+//   setToken(data.token);
+//   return data;
+// };
 export const signin = async body => {
   const { data } = await axios.post('users/login', body);
   setToken(data.token);
@@ -32,6 +33,16 @@ export const logout = async () => {deleteToken();
   
   return data;
 };
+
+export const refreshAuth = () => {
+  if (localStorage.getItem('persist:auth') !== null) {
+    const token = JSON.parse(localStorage.getItem('persist:auth'))
+	  setToken(JSON.parse(token?.token))
+  } else {
+    setToken('')
+  }
+
+}
 
 // {
 //     "name": "ddd123",

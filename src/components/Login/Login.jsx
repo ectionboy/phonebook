@@ -16,9 +16,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginThunk } from 'redux/auth/slice';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { loginThunk } from 'redux/auth/authThunk';
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 

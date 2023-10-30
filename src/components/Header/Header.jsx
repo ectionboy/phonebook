@@ -4,10 +4,10 @@ import UserMenu from 'components/UserMenu/UserMenu';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authSelector } from 'redux/selectors';
+import { isLoggedIn } from 'redux/selectors';
 
 const Header = () => {
-  const isAuth = useSelector(authSelector);
+  const isAuth = useSelector(isLoggedIn);
 
   const navigate = useNavigate();
 

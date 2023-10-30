@@ -1,8 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
-import { deleteToken } from 'api/auth';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from 'redux/auth/slice';
+import { logOutThunk } from 'redux/auth/authThunk';
 import { nameSelector } from 'redux/selectors';
 
 const UserMenu = () => {
@@ -11,8 +10,7 @@ const UserMenu = () => {
     const dispatch = useDispatch();
 
     const exit = () => {
-      dispatch(logOut());
-      deleteToken()
+      dispatch(logOutThunk());
     };
 
     const handleButton = () => {

@@ -1,4 +1,7 @@
 export const initialState = {
     profile: { name: null, email: null },
-    token:''
+    token:'',
+    isLoggedIn: false,
+    error: null,
+    isRefreshing: false,
 }
