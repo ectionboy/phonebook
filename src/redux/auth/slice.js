@@ -54,20 +54,17 @@ const { initialState } = require("./initialState");
   const refreshUserAuthPending = state => {
     state.isLoggedIn = false;
     state.error = null;
-    state.isRefreshing = true;
   };
   
   const refreshUserAuthFulfilled = (state, { payload }) => {
     state.isLoggedIn = true;
     state.profile = payload;
     state.error = null;
-    state.isRefreshing = false;
   };
   
   const refreshUserAuthrRejected = (state, { payload }) => {
     state.isLoggedIn = false;
     state.error = payload;
-    state.isRefreshing = false;
   };
 
   const arrThunk = [signUpThunk, loginThunk, logOutThunk];

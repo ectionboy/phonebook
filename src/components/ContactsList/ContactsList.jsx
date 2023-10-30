@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/contacts/operations';
 import { getContacts, getFilter } from 'redux/selectors';
+import EmptyContactsList from 'components/EmptyContactsList/EmptyContactsList';
 const ContactsList = () => {
   const [filtered, setFiltered] = useState([]);
   const { items, isLoading, error } = useSelector(getContacts);
@@ -63,6 +64,8 @@ const ContactsList = () => {
             {isLoading && <Typography variant="overline" display="block"  gutterBottom>Loading contacts...</Typography>}
       {error &&  <Alert  sx={{marginTop: '8px'}} severity="warning">{error}</Alert>
 }
+{items.length === 0 && !error && !isLoading && <EmptyContactsList />}
+
       <List sx={{ width: '100%', maxWidth: 300, bgcolor: 'background.paper' }}>
         {filtered &&
           filtered.map(contact => (

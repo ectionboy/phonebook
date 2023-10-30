@@ -3,5 +3,4 @@ export const initialState = {
     token:'',
     isLoggedIn: false,
     error: null,
-    isRefreshing: false,
 }
