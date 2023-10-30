@@ -55,9 +55,6 @@ const Register = () => {
 
   const formSubmit = e => {
     e.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(password);
     Reg({ name, email, password });
     setPassword('');
   };
