@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import NotFound from './NotFound/NotFound';
-import Contacts from './Contacts/Contacts';
 // import Register from './Register/Register';
 // import Login from './Login/Login';
 import { Suspense, lazy, useEffect } from 'react';
@@ -33,9 +32,7 @@ export const App = () => {
           <Route
             path="/contacts"
             element={
-              <PrivateRoute>
-                <Contacts />
-              </PrivateRoute>
+              <PrivateRoute />
             }
           />
         </Route>
