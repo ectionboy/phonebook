@@ -5,7 +5,6 @@ import { isLoggedIn } from 'redux/selectors';
 
 const PrivateRoute = ({ children }) => {
   const isAuth = useSelector(isLoggedIn);
-
   return isAuth ? children : <Navigate to="/login" />;
 };
 

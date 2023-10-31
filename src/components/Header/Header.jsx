@@ -15,7 +15,7 @@ const Header = () => {
     navigate('/');
   };
   const navToContactsPage = () => {
-    navigate('/contacts');
+    navigate('contacts');
   };
 
   return (
